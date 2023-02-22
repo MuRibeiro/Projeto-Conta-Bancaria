@@ -2,6 +2,8 @@ package conta;
 
 import java.util.Scanner;
 import conta.model.Conta;
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 
 public class Menu {
@@ -39,6 +41,20 @@ public class Menu {
 			//Visualizamos os dados da Conta c1 após o Depósito
 			c1.visualizar();
 			
+			ContaCorrente c3 = new ContaCorrente(3, 123, 1, "Murilo Ribeiro", 30000.f, 10000.0f);
+			
+			c3.visualizar();
+			
+			c3.sacar(35000);
+			
+			c3.visualizar();
+			
+			ContaPoupanca cp1 = new ContaPoupanca(3, 123, 2, "Victor", 100000.0f, 15);
+			cp1.visualizar();
+			cp1.sacar(1000.0f);
+			cp1.visualizar();
+			cp1.depositar(5000.0f);
+			cp1.visualizar();
 			
 			int opcao;
 			
