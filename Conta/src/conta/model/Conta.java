@@ -1,6 +1,6 @@
 package conta.model;
 
-public class Conta {
+public abstract class Conta {
 
 	// cria as caracteristicas da classe conta. 
 			private int numero;

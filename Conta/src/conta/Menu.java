@@ -1,5 +1,6 @@
 package conta;
 
+import java.io.IOException;
 import java.util.Scanner;
 import conta.model.Conta;
 import conta.model.ContaCorrente;
@@ -13,50 +14,17 @@ public class Menu {
 			
 			Scanner leia = new Scanner(System.in);
 			
-			//Criamos o Objeto Conta
-			Conta c1 = new Conta(1, 123, 1, "Murilo Ribeiro", 30000.f);// instaciamos o objeto CONTA e entramos com os dados
+			ContaCorrente cc3 = new ContaCorrente(3, 123, 1, "Murilo Ribeiro", 30000.f, 10000.0f);
 			
-			//Visualizamos os dados da conta c1
-			c1.visualizar(); // chama o metodo para mostrar todas as informações na tela
-			
-			//Alteramos o Saldo da Conta c1
-			c1.setSaldo(35000.0f); // chama o set para alterar a informação do saldo
-			
-			//Visualizamos apenas o Saldo da Conta c1
-			System.out.println("\n" + c1.getSaldo());// chama o get para mostrar o saldo alterado
-			
-			//Criamos a Conta c2
-			Conta c2 = new Conta(2, 123, 2, "Juliana Ribeiro", 300000.f);// instaciamos o objeto CONTA e entramos com os dados
-			
-			//Visualizamos a Conta c2
-			c2.visualizar();
-			
-			//Efetuamos um Saque na Conta c2 e visualizamos e novo Saldo 
-			if(c2.sacar(1000000.0f));
-				System.out.println("\nSaldo dísponivel: " + c2.getSaldo());
-			
-			//Efetuamos um Deposito na Conta c1
-			c1.depositar(10000.0f);
-			
-			//Visualizamos os dados da Conta c1 após o Depósito
-			c1.visualizar();
-			
-			ContaCorrente c3 = new ContaCorrente(3, 123, 1, "Murilo Ribeiro", 30000.f, 10000.0f);
-			
-			c3.visualizar();
-			
-			c3.sacar(35000);
-			
-			c3.visualizar();
+			cc3.visualizar();
 			
 			ContaPoupanca cp1 = new ContaPoupanca(3, 123, 2, "Victor", 100000.0f, 15);
 			cp1.visualizar();
-			cp1.sacar(1000.0f);
-			cp1.visualizar();
-			cp1.depositar(5000.0f);
-			cp1.visualizar();
+		
 			
-			int opcao;
+			String titular;
+			float saldo, limite, valor;
+			int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 			
 			while (true) {
 				
@@ -92,49 +60,166 @@ public class Menu {
 					case 1: 
 						System.out.println("Criar Conta\n\n");
 						
+						System.out.println("Número da Agencia: ");
+						agencia = leia.nextInt();
+						
+						System.out.println("Nome do Titular: ");
+						leia.skip("\\R?");
+						titular = leia.nextLine();
+						
+						do {
+							System.out.println("Tipo da Conta (1 - CC / 2 - CP): ");
+							tipo = leia.nextInt();
+						}while(tipo < 1 && tipo > 2);
+						
+						System.out.println("Saldo da Conta: ");
+						saldo = leia.nextFloat();
+						
+						switch(tipo) {
+							case 1 ->{
+								System.out.println("Limite da Conta Corrente: ");
+								limite = leia.nextFloat();
+								ContaCorrente cc = new ContaCorrente(0, agencia, tipo, titular, saldo, limite);
+								cc.visualizar();
+							}
+							
+							case 2 -> {
+								System.out.println("Aniversário da Conta Poupança");
+								aniversario = leia.nextInt();
+								ContaPoupanca cp = new ContaPoupanca(0, agencia, tipo, titular, saldo, aniversario);
+								cp.visualizar();
+							}
+							
+						}
+						
+						keyPress();
 						break;
 					
 					case 2:
 						System.out.println("Listar todas as Contas\n\n");
-					
+
+						keyPress();
 						break;
 					
 					case 3:
 						System.out.println("Consultar dados da conta - por número\n\n");
-					
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						keyPress();
 						break;
 					
 					case 4: 
 						System.out.println("Atualizar dados da conta\n\n");
 						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Número da Agencia: ");
+						agencia = leia.nextInt();
+						
+						System.out.println("Nome do Titular: ");
+						leia.skip("\\R?");
+						titular = leia.nextLine();
+						
+						tipo = 0;
+						
+						System.out.println("Saldo da Conta: ");
+						saldo = leia.nextFloat();
+						
+						switch(tipo) {
+							case 1 ->{
+								System.out.println("Limite da Conta Corrente: ");
+								limite = leia.nextFloat();
+								ContaCorrente cc = new ContaCorrente(0, agencia, tipo, titular, saldo, limite);
+								cc.visualizar();
+							}
+							
+							case 2 -> {
+								System.out.println("Aniversário da Conta Poupança");
+								aniversario = leia.nextInt();
+								ContaPoupanca cp = new ContaPoupanca(0, agencia, tipo, titular, saldo, aniversario);
+								cp.visualizar();
+							}
+							
+							default -> System.out.println("Opção Inválida");
+							
+						}
+						
+						keyPress();
 						break;
 					
 					case 5: 
 						System.out.println("Apagar a conta\n\n");
 						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						keyPress();
 						break;
 					
 					case 6:
 						System.out.println("Saque\n\n");
 						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Valor do Saque: ");
+						valor = leia.nextFloat();
+						
+						keyPress();
 						break;
 					
 					case 7: 
 						System.out.println("Depósito\n\n");
 						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Valor do Depósito: ");
+						valor = leia.nextFloat();
+						
+						keyPress();
 						break;
 					
 					case 8:
 						System.out.println("Transferência entre contas\n\n");
-					
+
+						System.out.println("Número da Conta - Origem: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Número da Conta - Destino: ");
+						numeroDestino = leia.nextInt();
+						
+						System.out.println("Valor do Transferência: ");
+						valor = leia.nextFloat();
+						
+						keyPress();
 						break;
 					
 					default:
 						System.out.println("\nOpção Inválida!\n");
-					
+
+						keyPress();
 						break;
 				}
 			}
 	}
+	
+	public static void keyPress() {
+
+		try {
+
+			System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+			System.in.read();
+
+		} catch (IOException e) {
+
+			System.out.println("Você pressionou uma tecla diferente de enter!");
+
+		}
+	}
+
 
 }
