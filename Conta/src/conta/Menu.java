@@ -18,36 +18,20 @@ public class Menu {
 			
 			ContaController contas = new ContaController();
 			
-			ContaCorrente cc3 = new ContaCorrente(3, 123, 1, "Murilo Ribeiro", 30000.f, 10000.0f);
-			
-			cc3.visualizar();
-			
-			ContaPoupanca cp1 = new ContaPoupanca(3, 123, 2, "Victor", 100000.0f, 15);
-			cp1.visualizar();
-		
-			System.out.println("\nCriar Contas\n");
-			
-			ContaCorrente cc1 = new ContaCorrente(contas.gerarNumero(), 123, 1, "João da Silva", 1000f, 100.0f);
-			contas.cadastrar(cc1);
-				
-			ContaCorrente cc2 = new ContaCorrente(contas.gerarNumero(), 124, 1, "Maria da Silva", 2000f, 100.0f);
-			contas.cadastrar(cc2);
-			
-			ContaPoupanca cp11 = new ContaPoupanca(contas.gerarNumero(), 125, 2, "Mariana dos Santos", 4000f, 12);
-			contas.cadastrar(cp11);
-			
-			ContaPoupanca cp2 = new ContaPoupanca(contas.gerarNumero(), 125, 2, "Juliana Ramos", 8000f, 15);
-			contas.cadastrar(cp2);
-			
-			contas.listarTodas();
-
-			
 			String titular;
 			float saldo, limite, valor;
 			int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 			
 			while (true) {
 				
+				System.out.println("                                                     *****       ");
+				System.out.println("                                                    *     *      ");
+				System.out.println("													 *   		 ");
+				System.out.println("                                                     *****       ");
+				System.out.println("                                                    *     *      ");
+				System.out.println("                                                     *****       ");
+				System.out.println("                                         ");
+				System.out.println("");
 				System.out.println("*****************************************************************");
 				System.out.println("*                                                               *");
 				System.out.println("*                   BANCO DO BRAZIL COM Z                       *");
@@ -200,6 +184,8 @@ public class Menu {
 						System.out.println("Valor do Saque: ");
 						valor = leia.nextFloat();
 						
+						contas.sacar(numero, valor);
+						
 						keyPress();
 						break;
 					
@@ -211,6 +197,8 @@ public class Menu {
 						
 						System.out.println("Valor do Depósito: ");
 						valor = leia.nextFloat();
+						
+						contas.depositar(numero, valor);
 						
 						keyPress();
 						break;
@@ -227,11 +215,14 @@ public class Menu {
 						System.out.println("Valor do Transferência: ");
 						valor = leia.nextFloat();
 						
+						contas.transferir(numero, numeroDestino, valor);
+						
 						keyPress();
 						break;
 					
 					default:
-						//System.out.println("\nOpção Inválida!\n");
+						System.out.println("\nOpção Inválida!");
+						System.out.println("Digite uma opção de (1 - 9)\n");
 
 						keyPress();
 						break;
